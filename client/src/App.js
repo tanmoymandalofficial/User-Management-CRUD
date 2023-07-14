@@ -8,7 +8,6 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { getUser } from './redux/userSlice';
 import EditUser from './Component/EditUser';
-import DeleteUser from './Component/DeleteUser';
 
 
 function App() {
@@ -18,7 +17,7 @@ function App() {
   useEffect(()=>{
     const fetchdata = async ()=>{
         try {
-            const responce = await axios.get('http://localhost:3002/');
+            const responce = await axios.get('https://react-user-curd.onrender.com');
             dispatch(getUser(responce.data));
         } catch (error) {
             console.log(error);
@@ -35,7 +34,6 @@ function App() {
         <Route path='/' element={<Users/>}></Route>
         <Route path='/create' element={<CreateUser/>}></Route>
         <Route path='/edit/:id' element={<EditUser/>}></Route>
-        <Route path='/delete/:id' element={<DeleteUser/>}></Route>
       </Routes>
     
     </BrowserRouter>

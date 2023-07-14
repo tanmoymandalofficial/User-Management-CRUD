@@ -20,7 +20,7 @@ const EditUser = () => {
 
     const handleUpdate = (e)=>{
         e.preventDefault();
-        axios.put(`http://localhost:3002/update/${id}`, { name, email, mobile})
+        axios.put(`https://react-user-curd.onrender.com/update/${id}`, { name, email, mobile})
         .then(res => {
             dispatch(updateUser({id, name, email, mobile}));
             console.log(res);

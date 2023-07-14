@@ -15,7 +15,7 @@ const CreateUser = () => {
 
     const handleSubmit = (e)=>{
         e.preventDefault();
-        axios.post('http://localhost:3002/create', {name, email, mobile})
+        axios.post('https://react-user-curd.onrender.com/create', {name, email, mobile})
         .then(res => {
             dispatch(addUser(res.data));
             console.log(res);

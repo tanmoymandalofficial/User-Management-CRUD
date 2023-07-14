@@ -10,7 +10,7 @@ const Users = () => {
     const dispach = useDispatch();
 
    const handleDelete = (id)=>{
-        axios.delete(`http://localhost:3002/delete/${id}`)
+        axios.delete(`https://react-user-curd.onrender.com/delete/${id}`)
         .then(res => {
             dispach(deleteUser({id}));
             console.log(res)
