@@ -1,26 +1,22 @@
-import React, { useEffect } from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
+
 import axios from 'axios';
-import {useDispatch, useSelector} from 'react-redux';
-import { getUser } from '../redux/userSlice';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { useDispatch, useSelector} from 'react-redux';
 import { Link } from 'react-router-dom';
+import { deleteUser } from '../redux/userSlice';
 
 const Users = () => {
-    const dispatch = useDispatch();
     const users = useSelector(state => state.users.users);
+    const dispach = useDispatch();
 
-    useEffect(()=>{
-        const fetchdata = async ()=>{
-            try {
-                const responce = await axios.get('http://localhost:3002/');
-                dispatch(getUser(responce.data));
-            } catch (error) {
-                console.log(error);
-            }
-            
-        }
-        fetchdata();
-    },[])
+   const handleDelete = (id)=>{
+        axios.delete(`http://localhost:3002/delete/${id}`)
+        .then(res => {
+            dispach(deleteUser({id}));
+            console.log(res)
+        })
+        .catch(err => console.log(err))
+   }
 
 
   return (
@@ -46,9 +42,9 @@ const Users = () => {
                                 <td>{user.email}</td>
                                 <td>{user.mobile}</td>
                                 <td>
-                                    <button className='btn btn-sm btn-success'>Update</button>
+                                    <Link to={`/edit/${user.id}`} className='btn btn-sm btn-success'>Update</Link>
                                     <span> </span>
-                                    <button className='btn btn-sm btn-danger'>Delete</button>
+                                    <button onClick={()=>handleDelete(user.id)} className='btn btn-sm btn-danger'>Delete</button>
                                 </td>
                             </tr>)
                         })
